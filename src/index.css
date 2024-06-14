@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  --font-source-sans: "Source Sans 3", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --dark-grey: #262626;
+  --dark: rgb(0, 0, 0, .9);
+  --standard-blue: #2271D1;
+  --light-blue: #6BD1FF;
+  --light-green: #00C86F;
+  --light-yellow: #FFBA05;
+  --blue-shadow-button: 7px 7px 12px -4px #2271D1B2 inset,
+    -7px -7px 12px -4px #2271D1B2 inset;
+  --yellow-shadow: 0px 0px 17px 8px #FFBA05 inset;
+  --green-shadow: 0px 0px 17px 8px #00C86F inset;
+  --blue-shadow: 0px 0px 17px 8px #6BD1FF inset;
+}
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  font-optical-sizing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--dark);
+}
