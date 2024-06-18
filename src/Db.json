@@ -1,0 +1,47 @@
+﻿[
+  {
+    "id": 0,
+    "tema": "frontend",
+    "imagem": "src/assets/frontend/capa-1.png"
+  },
+  {
+    "id": 1,
+    "tema": "frontend",
+    "imagem": "src/assets/frontend/capa-2.png"
+  },
+  {
+    "id": 2,
+    "tema": "frontend",
+    "imagem": "src/assets/frontend/capa-3.png"
+  },
+  {
+    "id": 3,
+    "tema": "backend",
+    "imagem": "src/assets/backend/capa-1.png"
+  },
+  {
+    "id": 4,
+    "tema": "backend",
+    "imagem": "src/assets/backend/capa-2.png"
+  },
+  {
+    "id": 5,
+    "tema": "backend",
+    "imagem": "src/assets/backend/capa-3.png"
+  },
+  {
+    "id": 6,
+    "tema": "mobile",
+    "imagem": "src/assets/mobile/capa-1.png"
+  },
+  {
+    "id": 7,
+    "tema": "mobile",
+    "imagem": "src/assets/mobile/capa-2.png"
+  },
+  {
+    "id": 8,
+    "tema": "mobile",
+    "imagem": "src/assets/mobile/capa-3.png"
+  }
+]

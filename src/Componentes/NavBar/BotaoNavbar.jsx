@@ -12,6 +12,7 @@ const BotaoNav = styled.button`
   border: 2px solid #F7F7F7;
   cursor: pointer;
   text-transform: uppercase;
+  max-width: 100%;
   transition: all .37s ease-out;
 
   &:hover {
@@ -19,6 +20,13 @@ const BotaoNav = styled.button`
     box-shadow: var(--blue-shadow-button);
     border: 2px solid var(--standard-blue);
     background: var(--dark);
+    transition: all .37s ease-out;
+  }
+
+  @media screen and (width < 750px) {
+    width: 7rem;
+    line-height: 1.4lh;
+    font-size: .8rem;
     transition: all .37s ease-out;
   }
 `

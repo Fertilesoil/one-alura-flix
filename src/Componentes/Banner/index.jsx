@@ -10,7 +10,7 @@ const SecaoBanner = styled.section`
   content: "";
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 80vh;
   top: 0;
   left: 0;
   background-image: url(${imagemPlayer});
@@ -27,7 +27,7 @@ const ConteudoBanner = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
-  top: 210px;
+  top: 100px;
   padding: 0 1.5rem;
   width: 100%;
   height: 25rem;

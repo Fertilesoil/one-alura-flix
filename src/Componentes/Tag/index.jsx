@@ -42,12 +42,12 @@ const TagPadrao = styled.div`
     }
   }};
   font-weight: 600;
-  transition: all .37s;
+  transition: all .37s ease-out;
 
   @media screen and (width < 850px) {  
-    width: ${props => props.$tamanho ? "17.8rem" : ""};
-    font-size: ${props => props.$tamanho ? "1.8rem" : ""};
-    transition: all .37s;
+    width: ${props => props.$tamanho && "17.8rem"};
+    font-size: ${props => props.$tamanho && "1.8rem"};
+    transition: all .37s ease-out;
   }
 `
 
