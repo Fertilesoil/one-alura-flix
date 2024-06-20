@@ -5,11 +5,13 @@ import NavBar from "./Componentes/NavBar"
 import Secao from "./Componentes/Secao"
 import Card from "./Componentes/Card"
 import { gruposDeCards } from "./Utils/Utilidades"
+import Modal, { OverLay } from "./Componentes/Card/Modal"
 
 function App() {
-
+  
   return (
     <>
+      <OverLay />
       <NavBar />
       <Banner />
       <ConteudoPrincipal>
@@ -22,6 +24,7 @@ function App() {
         })}
       </ConteudoPrincipal>
       <Footer />
+      <Modal />
     </>
   )
 }

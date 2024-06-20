@@ -15,9 +15,6 @@
   --yellow-shadow: 7px 7px 12px -4px #FFBA05 inset, -7px -7px 12px -4px #FFBA05 inset;
   --green-shadow: 7px 7px 12px -4px #00C86F inset, -7px -7px 12px -4px #00C86F inset;
   --blue-shadow: 7px 7px 12px -4px #6BD1FF inset, -7px -7px 12px -4px #6BD1FF inset;
-  /* --yellow-shadow: 0px 0px 17px 8px #FFBA05 inset;
-  --green-shadow: 0px 0px 17px 8px #00C86F inset;
-  --blue-shadow: 0px 0px 17px 8px #6BD1FF inset; */
 }
 
 *,

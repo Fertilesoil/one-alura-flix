@@ -1,6 +1,5 @@
 ﻿import styled from "styled-components"
 import Tag from "../Tag"
-import Card from "../Card/index";
 
 const SecaoTema = styled.section`
   display: flex;

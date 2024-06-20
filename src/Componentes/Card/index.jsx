@@ -1,5 +1,6 @@
 ﻿import { PencilLine, Trash } from "lucide-react"
 import styled from "styled-components"
+import { contextoAlura } from "../../Context/UseContextHook";
 
 const Footer = styled.footer`
   display: flex;
@@ -65,6 +66,8 @@ const Imagem = styled.figure`
 
 const Card = ({ imagem, titulo }) => {
 
+  const { setOpenModal } = contextoAlura();
+
   return (
     <Article $titulo={titulo}>
       <Imagem>
@@ -76,7 +79,7 @@ const Card = ({ imagem, titulo }) => {
           <Trash strokeWidth={`2.5px`} size={27} />
         </button>
 
-        <button>
+        <button onClick={() => setOpenModal(estado => !estado)}>
           <PencilLine strokeWidth={`2.5px`} size={27} />
         </button>
       </Footer>
