@@ -1,6 +1,6 @@
-﻿import { PencilLine, Trash } from "lucide-react"
-import styled from "styled-components"
+﻿import styled from "styled-components"
 import { contextoAlura } from "../../Context/UseContextHook";
+import { PencilLine, Trash } from "lucide-react"
 
 const Footer = styled.footer`
   display: flex;

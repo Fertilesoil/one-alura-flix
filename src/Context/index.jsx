@@ -1,10 +1,10 @@
-﻿import React, { createContext } from "react";
+﻿import React from "react";
 
-export const AluraContext = createContext();
+export const AluraContext = React.createContext();
 
 const ContextProvider = ({ children }) => {
-
-  const [openModal, setOpenModal] = React.useState(true);
+  AluraContext.displayName = "Alura Flix Context";
+  const [openModal, setOpenModal] = React.useState(false);
   
   const shared = {
     openModal,

@@ -1,6 +1,7 @@
 ﻿import React from "react"
 import styled from "styled-components"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { gruposDeCards } from "../../../Utils/Utilidades"
 
 const WrapperDropDown = styled.div`
   position: relative;
@@ -103,11 +104,12 @@ const OptionDrop = styled.button`
 
 export const CampoCategoria = ({ campo }) => {
 
+  const temas = Object.keys(gruposDeCards);
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
   const [categoria, setCategoria] = React.useState("Escolha sua categoria...");
 
-  const temas = ["Empresa", "Troca", "Mouse"];
+  // const temas = ["Empresa", "Troca", "Mouse"];
 
   const toggleDropdown = () => {
     if (drop) {
