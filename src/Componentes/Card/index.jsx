@@ -7,6 +7,7 @@ const Card = ({ imagem, titulo }) => {
 
   const { setOpenModal } = contextoAlura();
 
+  console.log(imagem);
   return (
     <Article $titulo={titulo}>
       <Imagem>

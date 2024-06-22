@@ -112,7 +112,6 @@ const OptionDrop = styled.button`
 export const CampoCategoria = ({ campo }) => {
 
   const { categorias } = contextoAlura();
-  console.log(categorias);
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
   const [categoria, setCategoria] = React.useState("Escolha sua categoria...");

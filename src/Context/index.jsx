@@ -23,7 +23,6 @@ const ContextProvider = ({ children }) => {
       }, {});
     setVideos(gruposDeCards);
     setCategorias([Object.keys(gruposDeCards)])
-    console.log(`Fui chamado`);
   }
 
   React.useEffect(() => {

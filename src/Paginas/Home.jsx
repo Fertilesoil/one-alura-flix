@@ -12,8 +12,8 @@ const Home = () => {
       <ConteudoPrincipal>
         {Object.keys(videos).map(secao => {
           return <Secao key={secao} secao={secao}>
-            {videos[secao].map((secao) => {
-              return <Card key={secao.id} imagem={secao.imagem} titulo={secao.categoria} />
+            {videos[secao].map((card) => {
+              return <Card key={card.id} imagem={card.imagem} titulo={card.categoria} />
             })}
           </Secao>
         })}
