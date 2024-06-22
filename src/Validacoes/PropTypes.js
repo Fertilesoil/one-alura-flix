@@ -18,4 +18,9 @@ export const childrenPropTypes = {
 export const inputPropTypes = {
   campo: PropTypes.string,
   name: PropTypes.string,
+  funcao: PropTypes.func,
+}
+
+export const campoCategoriaPropTypes = {
+  campo: PropTypes.string,
 }

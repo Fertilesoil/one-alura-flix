@@ -1,7 +1,8 @@
 ﻿import React from "react"
 import styled from "styled-components"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import { gruposDeCards } from "../../../Utils/Utilidades"
+import { contextoAlura } from "../../../Context/UseContextHook"
+import { campoCategoriaPropTypes } from "../../../Validacoes/PropTypes"
 
 const WrapperDropDown = styled.div`
   position: relative;
@@ -110,7 +111,8 @@ const OptionDrop = styled.button`
 
 export const CampoCategoria = ({ campo }) => {
 
-  const temas = Object.keys(gruposDeCards);
+  const { categorias } = contextoAlura();
+  console.log(categorias);
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
   const [categoria, setCategoria] = React.useState("Escolha sua categoria...");
@@ -143,7 +145,7 @@ export const CampoCategoria = ({ campo }) => {
 
         {drop &&
           <ConteudoDrop $ativo={existe} >
-            {temas.map((tema) => {
+            {categorias[0].map((tema) => {
               return <OptionDrop key={tema} onClick={(e) => e.preventDefault()}>{tema}</OptionDrop>
             })}
           </ConteudoDrop>
@@ -152,3 +154,5 @@ export const CampoCategoria = ({ campo }) => {
     </Wrapper>
   )
 }
+
+CampoCategoria.propTypes = campoCategoriaPropTypes;

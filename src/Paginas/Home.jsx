@@ -2,17 +2,18 @@
 import Card from "../Componentes/Card"
 import ConteudoPrincipal from "../Componentes/ConteudoPrincipal"
 import Secao from "../Componentes/Secao"
-import { gruposDeCards } from "../Utils/Utilidades"
+import { contextoAlura } from "../Context/UseContextHook"
 
 const Home = () => {
+  const { videos } = contextoAlura();
   return (
     <>
       <Banner />
       <ConteudoPrincipal>
-        {Object.keys(gruposDeCards).map(secao => {
+        {Object.keys(videos).map(secao => {
           return <Secao key={secao} secao={secao}>
-            {gruposDeCards[secao].map((secao) => {
-              return <Card key={secao.id} imagem={secao.imagem} titulo={secao.tema} />
+            {videos[secao].map((secao) => {
+              return <Card key={secao.id} imagem={secao.imagem} titulo={secao.categoria} />
             })}
           </Secao>
         })}

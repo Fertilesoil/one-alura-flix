@@ -7,33 +7,32 @@ import React from 'react';
 
 const Modal = () => {
 
-  const video = {
+  const videoInicial = {
     titulo: "",
     categoria: "",
     imagem: "",
     video: "",
-    descicao: ""
+    descricao: ""
   }
 
   const { openModal, setOpenModal } = contextoAlura();
-  const [novoVideo, setNovoVideo] = React.useState(video);
+  const [novoVideo, setNovoVideo] = React.useState(videoInicial);
 
   const guardarObjeto = (e) => {
-    let nome = e.target.name;
-    let valor = e.target.value;
+    const { name, value } = e.target;
 
     setNovoVideo(estado => ({
       ...estado,
-      [nome]: valor
+      [name]: value
     }));
+    console.log(novoVideo);
   }
 
   React.useEffect(() => {
     if (!openModal) {
-      setNovoVideo({...video});
+      setNovoVideo(videoInicial);
     }
-
-  }, []);
+  }, [openModal]);
 
   return (
     <ModalFormulario open={openModal}>
@@ -49,12 +48,33 @@ const Modal = () => {
           <CampoFormularioModal
             campo={`Título`}
             name={`titulo`}
+            valor={novoVideo.titulo}
             funcao={guardarObjeto}
           />
+
           <CampoCategoria campo={`Categoria`} />
-          <CampoFormularioModal campo={`Imagem`} name={`imagem`} />
-          <CampoFormularioModal campo={`Vídeo`} name={`video`} />
-          <CampoDescricaoModal campo={`Descrição`} name={`descricao`} />
+
+          <CampoFormularioModal
+            campo={`Imagem`}
+            name={`imagem`}
+            valor={novoVideo.imagem}
+            funcao={guardarObjeto}
+          />
+
+
+          <CampoFormularioModal
+            campo={`Vídeo`}
+            name={`video`}
+            valor={novoVideo.video}
+            funcao={guardarObjeto}
+          />
+
+          <CampoDescricaoModal
+            campo={`Descrição`}
+            name={`descricao`}
+            valor={novoVideo.descricao}
+            funcao={guardarObjeto}
+          />
 
           <BotoesForms>
             <BotaoNavbar>

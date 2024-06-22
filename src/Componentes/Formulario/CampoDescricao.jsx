@@ -2,20 +2,20 @@
 import { LabelCadastro, LabelModal } from "./Label";
 import { TextAreaCadastro, TextAreaModal } from "./TextArea";
 
-export const CampoDescricaoModal = ({ campo, name }) => {
+export const CampoDescricaoModal = ({ campo, name, funcao, valor }) => {
   return (
     <LabelModal>
       {campo}
-      <TextAreaModal name={name} />
+      <TextAreaModal name={name} onChange={funcao} value={valor} />
     </LabelModal>
   )
 }
 
-export const CampoDescricaoCadastro = ({ campo, name }) => {
+export const CampoDescricaoCadastro = ({ campo, name, funcao, valor }) => {
   return (
     <LabelCadastro>
       {campo}
-      <TextAreaCadastro name={name} />
+      <TextAreaCadastro name={name} onChange={funcao} value={valor} />
     </LabelCadastro>
   )
 }
