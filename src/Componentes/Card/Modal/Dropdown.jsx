@@ -89,16 +89,22 @@ const OptionDrop = styled.button`
   text-align: start;
   cursor: pointer;
 
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
   &:hover {
     background: #6bd0ff6a;
   }
 
   &:nth-of-type(1) {
-    border-radius: 5% 5% 0 0;
+    border-top-right-radius: .3rem;
+    border-top-left-radius: .3rem;
   }
 
   &:nth-last-of-type(1) {
-    border-radius: 0 0 5% 5%;
+    border-bottom-right-radius: .3rem;
+    border-bottom-left-radius: .3rem;
   }
 `
 
@@ -108,8 +114,6 @@ export const CampoCategoria = ({ campo }) => {
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
   const [categoria, setCategoria] = React.useState("Escolha sua categoria...");
-
-  // const temas = ["Empresa", "Troca", "Mouse"];
 
   const toggleDropdown = () => {
     if (drop) {
@@ -127,19 +131,20 @@ export const CampoCategoria = ({ campo }) => {
     <Wrapper>
       <Paragrafo>{campo}</Paragrafo>
       <WrapperDropDown>
-        <BotaoDrop onClick={(e) => {
-          e.preventDefault();
-          return toggleDropdown();
-        }}>
+        <BotaoDrop
+          onClick={(e) => e.preventDefault()}
+          onMouseDown={() => {
+            return toggleDropdown()
+          }}>
           {categoria}
 
           {drop ? <ChevronUp /> : <ChevronDown />}
         </BotaoDrop>
 
         {drop &&
-          <ConteudoDrop $ativo={existe}>
+          <ConteudoDrop $ativo={existe} >
             {temas.map((tema) => {
-              return <OptionDrop key={tema}>{tema}</OptionDrop>
+              return <OptionDrop key={tema} onClick={(e) => e.preventDefault()}>{tema}</OptionDrop>
             })}
           </ConteudoDrop>
         }

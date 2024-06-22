@@ -4,7 +4,9 @@
 :root {
   --font-source-sans: "Source Sans 3", sans-serif;
   --font-roboto: "Roboto", sans-serif;
+  --font-white: #F5F5F5;
   --dark-grey: #262626;
+  --forms-grey: #262626;
   --dark: rgb(0, 0, 0, .9);
   --standard-blue: #2271D1;
   --light-blue: #6BD1FF;

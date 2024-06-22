@@ -7,7 +7,7 @@ const FooterFixo = styled.footer`
   color: #F7F7F7;
   background: var(--dark);
   min-height: 10vh;
-  box-shadow: 0px 5px 9px 9px #2271D1B2;
+  box-shadow: 0px 5px 6px 9px #2271D1B2;
 
   & > img {
     display: block;

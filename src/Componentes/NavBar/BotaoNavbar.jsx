@@ -1,42 +1,31 @@
-﻿import styled from 'styled-components'
+﻿import {botaoLink, forms, botao} from "./BotaoNavbar.module.css";
+import { Link } from 'react-router-dom'
+import { botaoNavBarPropTypes } from '../../Validacoes/PropTypes';
 
-const BotaoNav = styled.button`
-  font-family: var(--font-source-sans);
-  width: 9rem;
-  border-radius: .4rem;
-  line-height: 2lh;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #F7F7F7;
-  background: transparent;
-  border: 2px solid #F7F7F7;
-  cursor: pointer;
-  text-transform: uppercase;
-  max-width: 100%;
-  transition: all .37s ease-out;
+const BotaoNavbar = ({ children, to, tipo }) => {
 
-  &:hover {
-    color: var(--standard-blue);
-    box-shadow: var(--blue-shadow-button);
-    border: 2px solid var(--standard-blue);
-    background: var(--dark);
-    transition: all .37s ease-out;
+  switch (tipo) {
+    case "Link":
+      return (
+        <Link className={botaoLink} to={to}>
+          {children}
+        </Link>
+      )
+    case "Forms":
+      return (
+        <button className={forms}>
+          {children}
+        </button>
+      )
+    default:
+      return (
+        <button className={botao}>
+          {children}
+        </button>
+      )
   }
-
-  @media screen and (width < 750px) {
-    width: 7rem;
-    line-height: 1.4lh;
-    font-size: .8rem;
-    transition: all .37s ease-out;
-  }
-`
-
-const BotaoNavbar = ({ children }) => {
-  return (
-    <BotaoNav>
-      {children}
-    </BotaoNav>
-  )
 }
+
+BotaoNavbar.propTypes = botaoNavBarPropTypes;
 
 export default BotaoNavbar

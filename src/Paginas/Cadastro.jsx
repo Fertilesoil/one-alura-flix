@@ -1,8 +1,11 @@
-﻿import React from 'react'
+﻿import WrapperCadastro from '../Componentes/Cadastro/WrapperCadastro'
+import CadastroForms from '../Componentes/Cadastro/index';
 
 const Cadastro = () => {
   return (
-    <div>Cadastro</div>
+    <WrapperCadastro>
+      <CadastroForms />
+    </WrapperCadastro>
   )
 }
 
