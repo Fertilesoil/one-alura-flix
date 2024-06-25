@@ -67,7 +67,7 @@ const Article = styled.article`
 
   &:hover > figure {
     cursor: pointer;
-    filter: grayscale(100%);
+    filter: grayscale(100%) blur(2px);
     transition: all .27s ease-in-out;
   }
 

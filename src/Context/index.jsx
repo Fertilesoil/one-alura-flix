@@ -8,6 +8,7 @@ const ContextProvider = ({ children }) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [videos, setVideos] = React.useState([]);
   const [videoAtual, setVideoAtual] = React.useState(null);
+  const [cardAtual, setCardAtual] = React.useState(null);
   const [categorias, setCategorias] = React.useState([]);
 
   const chamadaApi = async () => {
@@ -26,6 +27,29 @@ const ContextProvider = ({ children }) => {
     setCategorias([Object.keys(gruposDeCards)])
   }
 
+  const salvarVideo = async (novoVideo) => {
+    try {
+      await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${novoVideo.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(novoVideo)
+      })
+        .then(res => {
+          if (res.ok) {
+            return res.json()
+          }
+        })
+        .then(data => {
+          console.log(data)
+          chamadaApi();
+          setOpenModal(false);
+        })
+        .catch(err => console.log(err))
+    } catch (error) {
+      console.error('Erro:', error);
+    }
+  };
+
   React.useEffect(() => {
     chamadaApi();
   }, []);
@@ -36,7 +60,11 @@ const ContextProvider = ({ children }) => {
     videos,
     categorias,
     videoAtual,
-    setVideoAtual
+    setVideoAtual,
+    chamadaApi,
+    salvarVideo,
+    cardAtual,
+    setCardAtual
   }
 
   return (

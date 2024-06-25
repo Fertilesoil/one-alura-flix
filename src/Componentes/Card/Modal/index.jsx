@@ -7,7 +7,7 @@ import React from 'react';
 
 const Modal = () => {
 
-  const { openModal, setOpenModal, videoAtual } = contextoAlura();
+  const { openModal, setOpenModal, videoAtual, salvarVideo } = contextoAlura();
 
   const videoInicial = {
     id: String(videoAtual?.id),
@@ -40,28 +40,6 @@ const Modal = () => {
     }));
     console.log(novoVideo);
   }
-
-  const salvarVideo = async () => {
-    try {
-      await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${novoVideo.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(novoVideo)
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json()
-          }
-        })
-        .then(data => {
-          console.log(data)
-          setOpenModal(false);
-        })
-        .catch(err => console.log(err))
-    } catch (error) {
-      console.error('Erro:', error);
-    }
-  };
 
   React.useEffect(() => {
     if (!openModal) {
@@ -115,7 +93,7 @@ const Modal = () => {
             <BotaoNavbar
               onClick={(e) => {
                 e.preventDefault();
-                salvarVideo()
+                salvarVideo(novoVideo);
               }}
             >
               Salvar

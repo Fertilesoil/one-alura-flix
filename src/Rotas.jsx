@@ -2,6 +2,7 @@
 import Home from './Paginas/Home'
 import Cadastro from './Paginas/Cadastro'
 import PaginaPadrao from './Paginas/PaginaPadrao'
+import Video from './Paginas/Video'
 
 const Rotas = () => {
 
@@ -12,6 +13,7 @@ const Rotas = () => {
         <Route path='/' element={<PaginaPadrao />}>
           <Route index element={<Home />} />
           <Route path='cadastro' element={<Cadastro />} />
+          <Route path='video' element={<Video />} />
         </Route>
 
       </Routes>
