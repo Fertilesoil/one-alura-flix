@@ -1,13 +1,18 @@
 ﻿import { contextoAlura } from "../../Context/UseContextHook";
-import { PencilLine, Trash } from "lucide-react"
+import { Clapperboard, PencilLine, Trash } from "lucide-react"
 import { Article, Imagem, Footer } from "./Card";
 import { cardPropTypes } from "../../Validacoes/PropTypes";
 
-const Card = ({ imagem, titulo }) => {
+const Card = ({ titulo, imagem, id }) => {
 
-  const { setOpenModal } = contextoAlura();
+  const { setOpenModal, videos, setVideoAtual } = contextoAlura();
 
-  console.log(imagem);
+  const abrirModal = () => {
+    const videoAtual = videos[titulo].find(video => video.id === id);
+    setVideoAtual(videoAtual);
+    setOpenModal(estado => !estado)
+  }
+
   return (
     <Article $titulo={titulo}>
       <Imagem>
@@ -19,8 +24,12 @@ const Card = ({ imagem, titulo }) => {
           <Trash strokeWidth={`2.5px`} size={27} />
         </button>
 
-        <button onMouseDown={() => setOpenModal(estado => !estado)}>
+        <button onMouseDown={abrirModal}>
           <PencilLine strokeWidth={`2.5px`} size={27} />
+        </button>
+
+        <button>
+          <Clapperboard strokeWidth={`2.5px`} size={27} />
         </button>
       </Footer>
     </Article>

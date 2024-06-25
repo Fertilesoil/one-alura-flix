@@ -7,16 +7,29 @@ import React from 'react';
 
 const Modal = () => {
 
+  const { openModal, setOpenModal, videoAtual } = contextoAlura();
+
   const videoInicial = {
-    titulo: "",
-    categoria: "",
-    imagem: "",
-    video: "",
-    descricao: ""
+    id: videoAtual?.id,
+    titulo: videoAtual?.titulo,
+    categoria: videoAtual?.categoria,
+    imagem: videoAtual?.imagem,
+    video: videoAtual?.video,
+    descricao: videoAtual?.descricao
   }
 
-  const { openModal, setOpenModal } = contextoAlura();
   const [novoVideo, setNovoVideo] = React.useState(videoInicial);
+
+  React.useEffect(() => {
+    setNovoVideo({
+      id: videoAtual?.id || 0,
+      titulo: videoAtual?.titulo || '',
+      categoria: videoAtual?.categoria || '',
+      imagem: videoAtual?.imagem || '',
+      video: videoAtual?.video || '',
+      descricao: videoAtual?.descricao || ''
+    });
+  }, [videoAtual]);
 
   const guardarObjeto = (e) => {
     const { name, value } = e.target;
@@ -27,6 +40,28 @@ const Modal = () => {
     }));
     console.log(novoVideo);
   }
+
+  const salvarVideo = async () => {
+    try {
+      await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${novoVideo.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(novoVideo)
+      })
+        .then(res => {
+          if (res.ok) {
+            return res.json()
+          }
+        })
+        .then(data => {
+          console.log(data)
+          setOpenModal(false);
+        })
+        .catch(err => console.log(err))
+    } catch (error) {
+      console.error('Erro:', error);
+    }
+  };
 
   React.useEffect(() => {
     if (!openModal) {
@@ -52,7 +87,7 @@ const Modal = () => {
             funcao={guardarObjeto}
           />
 
-          <CampoCategoria campo={`Categoria`} />
+          <CampoCategoria campo={`Categoria`} fechar={openModal} categoriaAtual={novoVideo.categoria} funcao={setNovoVideo} />
 
           <CampoFormularioModal
             campo={`Imagem`}
@@ -77,7 +112,12 @@ const Modal = () => {
           />
 
           <BotoesForms>
-            <BotaoNavbar>
+            <BotaoNavbar
+              onClick={(e) => {
+                e.preventDefault();
+                salvarVideo()
+              }}
+            >
               Salvar
             </BotaoNavbar>
 

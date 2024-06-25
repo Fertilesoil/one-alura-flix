@@ -1,7 +1,7 @@
 ﻿import PropTypes from "prop-types";
 
 export const botaoNavBarPropTypes = {
-  children: PropTypes.element,
+  children: PropTypes.string,
   to: PropTypes.string,
   tipo: PropTypes.string
 }
@@ -23,4 +23,7 @@ export const inputPropTypes = {
 
 export const campoCategoriaPropTypes = {
   campo: PropTypes.string,
+  fechar: PropTypes.bool,
+  categoriaAtual: PropTypes.string,
+  funcao: PropTypes.func,
 }

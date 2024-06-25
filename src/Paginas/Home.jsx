@@ -13,7 +13,7 @@ const Home = () => {
         {Object.keys(videos).map(secao => {
           return <Secao key={secao} secao={secao}>
             {videos[secao].map((card) => {
-              return <Card key={card.id} imagem={card.imagem} titulo={card.categoria} />
+              return <Card key={card.id} imagem={card.imagem} titulo={card.categoria} id={card.id} />
             })}
           </Secao>
         })}

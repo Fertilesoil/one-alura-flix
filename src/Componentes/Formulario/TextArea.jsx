@@ -9,7 +9,24 @@ export const TextAreaModal = styled.textarea`
   padding: .87rem;
   resize: none;
   height: 8rem;
+  line-height: 1.2lh;
   transition: all .37s ease-in-out;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar-track {
+    border-radius: 0 .8rem .8rem 0;
+    background-color: #2271D12B;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, var(--standard-blue), #1458ac);
+    border-radius: 0 .8rem .8rem 0;
+  }
 
   &:focus-within {
     border: 2px solid var(--light-blue);

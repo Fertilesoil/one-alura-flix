@@ -7,6 +7,7 @@ const ContextProvider = ({ children }) => {
   AluraContext.displayName = "Alura Flix Context";
   const [openModal, setOpenModal] = React.useState(false);
   const [videos, setVideos] = React.useState([]);
+  const [videoAtual, setVideoAtual] = React.useState(null);
   const [categorias, setCategorias] = React.useState([]);
 
   const chamadaApi = async () => {
@@ -33,7 +34,9 @@ const ContextProvider = ({ children }) => {
     openModal,
     setOpenModal,
     videos,
-    categorias
+    categorias,
+    videoAtual,
+    setVideoAtual
   }
 
   return (

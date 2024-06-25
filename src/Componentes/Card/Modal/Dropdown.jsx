@@ -6,7 +6,6 @@ import { campoCategoriaPropTypes } from "../../../Validacoes/PropTypes"
 
 const WrapperDropDown = styled.div`
   position: relative;
-  
 `
 
 const Paragrafo = styled.p`
@@ -109,12 +108,22 @@ const OptionDrop = styled.button`
   }
 `
 
-export const CampoCategoria = ({ campo }) => {
+export const CampoCategoria = ({ campo, fechar, categoriaAtual, funcao }) => {
 
   const { categorias } = contextoAlura();
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
-  const [categoria, setCategoria] = React.useState("Escolha sua categoria...");
+  const [categoria, setCategoria] = React.useState(null);
+
+  const operacaoClick = (e) => {
+    e.preventDefault();
+    setCategoria(e.target.textContent);
+    funcao(estado => ({
+      ...estado,
+      categoria: e.target.textContent
+    }))
+    setDrop(false);
+  }
 
   const toggleDropdown = () => {
     if (drop) {
@@ -127,6 +136,13 @@ export const CampoCategoria = ({ campo }) => {
       setDrop(true);
     }
   };
+
+  React.useEffect(() => {
+    if (!fechar) {
+      setDrop(false);
+    }
+    setCategoria(categoriaAtual)
+  }, [fechar, categoriaAtual]);
 
   return (
     <Wrapper>
@@ -145,7 +161,7 @@ export const CampoCategoria = ({ campo }) => {
         {drop &&
           <ConteudoDrop $ativo={existe} >
             {categorias[0].map((tema) => {
-              return <OptionDrop key={tema} onClick={(e) => e.preventDefault()}>{tema}</OptionDrop>
+              return <OptionDrop key={tema} onClick={(e) => operacaoClick(e)}>{tema}</OptionDrop>
             })}
           </ConteudoDrop>
         }

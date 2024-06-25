@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import { botaoNavBarPropTypes } from '../../Validacoes/PropTypes';
 
-const BotaoNavbar = ({ children, to, tipo }) => {
+const BotaoNavbar = ({ children, to, tipo, ...props }) => {
 
   switch (tipo) {
     case "Link":
@@ -13,13 +13,13 @@ const BotaoNavbar = ({ children, to, tipo }) => {
       )
     case "Forms":
       return (
-        <button className={forms}>
+        <button className={forms} {...props}>
           {children}
         </button>
       )
     default:
       return (
-        <button className={botao}>
+        <button className={botao} {...props}>
           {children}
         </button>
       )
