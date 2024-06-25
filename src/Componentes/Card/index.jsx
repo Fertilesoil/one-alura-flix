@@ -2,6 +2,27 @@
 import { Clapperboard, PencilLine, Trash } from "lucide-react"
 import { Article, Imagem, Footer } from "./Card";
 import { cardPropTypes } from "../../Validacoes/PropTypes";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import "./Card.css"
+
+const Assistir = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0; 
+  transform: translate(25%, 10%);
+  
+  opacity: 0;
+  transition: all .27s ease-in-out;
+
+  &:hover {
+    filter: drop-shadow(3px 3px 14px rgba(222, 222, 222, .7));
+    opacity: 1;
+    transition: all .27s ease-in-out;
+  }
+`
 
 const Card = ({ titulo, imagem, id }) => {
 
@@ -20,17 +41,19 @@ const Card = ({ titulo, imagem, id }) => {
       </Imagem>
 
       <Footer $titulo={titulo}>
-        <button>
+        <button className="botao">
           <Trash strokeWidth={`2.5px`} size={27} />
         </button>
 
-        <button onMouseDown={abrirModal}>
+        <button className="botao" onMouseDown={abrirModal}>
           <PencilLine strokeWidth={`2.5px`} size={27} />
         </button>
 
-        <button>
-          <Clapperboard strokeWidth={`2.5px`} size={27} />
-        </button>
+        <Assistir>
+          <Link className={`link-${titulo}`}>
+            <Clapperboard strokeWidth={`1.2px`} size={200} />
+          </Link>
+        </Assistir>
       </Footer>
     </Article>
   )

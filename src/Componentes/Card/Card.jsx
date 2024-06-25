@@ -41,6 +41,7 @@ const Footer = styled.footer`
   }
 `
 const Article = styled.article`
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;

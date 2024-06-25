@@ -10,7 +10,7 @@ const Modal = () => {
   const { openModal, setOpenModal, videoAtual } = contextoAlura();
 
   const videoInicial = {
-    id: videoAtual?.id,
+    id: String(videoAtual?.id),
     titulo: videoAtual?.titulo,
     categoria: videoAtual?.categoria,
     imagem: videoAtual?.imagem,
@@ -22,7 +22,7 @@ const Modal = () => {
 
   React.useEffect(() => {
     setNovoVideo({
-      id: videoAtual?.id || 0,
+      id: String(videoAtual?.id) || "0",
       titulo: videoAtual?.titulo || '',
       categoria: videoAtual?.categoria || '',
       imagem: videoAtual?.imagem || '',

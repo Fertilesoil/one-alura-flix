@@ -1,0 +1,15 @@
+﻿.link-frontend {
+  color: var(--light-blue);
+}
+
+.link-backend {
+  color: var(--light-green);
+}
+
+.link-mobile {
+  color: var(--light-yellow);
+}
+
+.botao {
+  z-index: 10;
+}
