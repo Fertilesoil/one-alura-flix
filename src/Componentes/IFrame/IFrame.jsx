@@ -34,11 +34,21 @@ const Descricao = styled.section`
 
   & > h1 {
     margin-bottom: .5rem;
+    color: #9BE1EB;
+  }
+
+  & > h3 {
+    color: #DAA520;
   }
 
   & > p:not(:last-child) {
-    margin-bottom: .5rem;
-    color: white;
+    margin-bottom: .4rem;
+  }
+
+  & > p {
+    font-weight: 500;
+    color: #DBDBCC;
+    font-size: 1.05rem;
   }
 
   @media screen and (width < 600px) {

@@ -18,16 +18,33 @@ const CadastroForms = () => {
           </WrapperCadastro>
 
           <DivisoriaCadastro>
-            <CampoFormularioCadastro campo={`Título`} name={`titulo`} />
-            <CampoFormularioCadastro campo={`Categoria`} name={`categoria`} />
+            <CampoFormularioCadastro
+              campo={`Título`}
+              name={`titulo`}
+            />
+
+            <CampoFormularioCadastro
+              campo={`Categoria`}
+              name={`categoria`}
+            />
           </DivisoriaCadastro>
 
           <DivisoriaCadastro>
-            <CampoFormularioCadastro campo={`Imagem`} name={`imagem`} />
-            <CampoFormularioCadastro campo={`Vídeo`} name={`video`} />
+            <CampoFormularioCadastro
+              campo={`Imagem`}
+              name={`imagem`}
+            />
+            
+            <CampoFormularioCadastro
+              campo={`Vídeo`}
+              name={`video`}
+            />
           </DivisoriaCadastro>
 
-          <CampoDescricaoCadastro campo={`Descrição`} name={`descricao`} />
+          <CampoDescricaoCadastro
+            campo={`Descrição`}
+            name={`descricao`}
+          />
 
           <BotoesCadastro>
             <BotaoNavbar tipo={`Forms`}>
