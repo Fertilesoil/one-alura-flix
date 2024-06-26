@@ -13,7 +13,7 @@ const Rotas = () => {
         <Route path='/' element={<PaginaPadrao />}>
           <Route index element={<Home />} />
           <Route path='cadastro' element={<Cadastro />} />
-          <Route path='video' element={<Video />} />
+          <Route path='video/:id' element={<Video />} />
         </Route>
 
       </Routes>

@@ -36,3 +36,10 @@
 body {
   background: var(--dark);
 }
+
+code {
+  background: #1D2C2F;
+  padding: .3rem;
+  border-radius: .7rem;
+  color: #E4B781;
+}

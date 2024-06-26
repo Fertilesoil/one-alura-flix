@@ -4,6 +4,7 @@ const Imagem = styled.figure`
   display: flex;
   flex: 1;
   position: relative;
+  max-height: 244px;
   transition: all .27s ease-in-out;
 
   & > img {
@@ -38,6 +39,7 @@ const Footer = styled.footer`
     }
   }};
     cursor: pointer;
+    z-index: 10;
   }
 `
 const Article = styled.article`
@@ -67,7 +69,7 @@ const Article = styled.article`
 
   &:hover > figure {
     cursor: pointer;
-    filter: grayscale(100%) blur(2px);
+    filter: grayscale(100%) blur(4px);
     transition: all .27s ease-in-out;
   }
 
@@ -82,6 +84,59 @@ const Article = styled.article`
   }
 `
 
+const Assistir = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0; 
+  transform: translate(60%, 35%);
+  opacity: 0;
+  transition: all .27s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+    transition: all .27s ease-in-out;
+  }
+
+  & > a {
+    position: absolute;
+    top: -50px;
+    left: -120px;
+    width: 100%;
+    height: 100%;
+    color: ${props => {
+    switch (props.$titulo) {
+      case "frontend":
+        return "var(--light-blue)"
+      case "backend":
+        return "var(--light-green)"
+      case "mobile":
+        return "var(--light-yellow)"
+      default:
+        return "#F7F7F7"
+    }
+  }};
+  }
+  
+  &:hover > * {
+    filter: ${props => {
+    switch (props.$titulo) {
+      case "frontend":
+        return "drop-shadow(20px 15px 50px var(--light-blue))"
+      case "backend":
+        return "drop-shadow(20px 15px 50px var(--light-green))"
+      case "mobile":
+        return "drop-shadow(20px 15px 50px var(--light-yellow))"
+      default:
+        return "drop-shadow(20px 15px 50px rgba(222, 222, 222, .7))"
+    }
+  }};
+  backdrop-filter: brightness(-2);
+  transition: all .27s ease-in-out;
+  }
+`
+
 export {
-  Footer, Article, Imagem
+  Footer, Article, Imagem, Assistir
 }

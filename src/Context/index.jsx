@@ -8,21 +8,20 @@ const ContextProvider = ({ children }) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [videos, setVideos] = React.useState([]);
   const [videoAtual, setVideoAtual] = React.useState(null);
-  const [cardAtual, setCardAtual] = React.useState(null);
   const [categorias, setCategorias] = React.useState([]);
 
   const chamadaApi = async () => {
     const data = await fetch("https://667633a7a8d2b4d072f2b182.mockapi.io/video")
       .then(data => data.json());
-    
-      const gruposDeCards = data.reduce((acc, card) => {
-        const categoria = card.categoria;
-        if (!acc[categoria]) {
-          acc[categoria] = [];
-        }
-        acc[categoria].push(card);
-        return acc;
-      }, {});
+
+    const gruposDeCards = data.reduce((acc, card) => {
+      const categoria = card.categoria;
+      if (!acc[categoria]) {
+        acc[categoria] = [];
+      }
+      acc[categoria].push(card);
+      return acc;
+    }, {});
     setVideos(gruposDeCards);
     setCategorias([Object.keys(gruposDeCards)])
   }
@@ -50,6 +49,40 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+  const buscarCardPorId = async (id, funcao, navegar) => {
+    await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        data = {
+          ...data,
+          video: data?.video.split("=")[1]
+        }
+
+        return funcao(data);
+      })
+      .catch(() => {
+        return navegar("/");
+      });
+  }
+
+  const apagarCard = async (id, titulo) => {
+    const novoEstado = await videos[titulo].filter(video => video.id !== id);
+    setVideos(estado => ({
+      ...estado,
+      [titulo]: novoEstado
+    }));
+
+    await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${id}`, {
+      method: "DELETE"
+    })
+  }
+
+  const abrirModal = (titulo, id) => {
+    const videoAtual = videos[titulo].find(video => video.id === id);
+    setVideoAtual(videoAtual);
+    setOpenModal(estado => !estado)
+  }
+
   React.useEffect(() => {
     chamadaApi();
   }, []);
@@ -60,11 +93,11 @@ const ContextProvider = ({ children }) => {
     videos,
     categorias,
     videoAtual,
-    setVideoAtual,
     chamadaApi,
     salvarVideo,
-    cardAtual,
-    setCardAtual
+    buscarCardPorId,
+    apagarCard,
+    abrirModal
   }
 
   return (
