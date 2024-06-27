@@ -1,4 +1,5 @@
-﻿import BotaoNavbar from '../../NavBar/BotaoNavbar';
+﻿/* eslint-disable react-hooks/exhaustive-deps */
+import BotaoNavbar from '../../NavBar/BotaoNavbar';
 import { contextoAlura } from "../../../Context/UseContextHook";
 import { CircleX } from 'lucide-react';
 import { CampoCategoria } from './Dropdown';
@@ -7,7 +8,7 @@ import React from 'react';
 
 const Modal = () => {
 
-  const { openModal, setOpenModal, videoAtual, salvarVideo } = contextoAlura();
+  const { openModal, dispatch, videoAtual, salvarVideo } = contextoAlura();
 
   const videoInicial = {
     id: String(videoAtual?.id),
@@ -38,7 +39,6 @@ const Modal = () => {
       ...estado,
       [name]: value
     }));
-    console.log(novoVideo);
   }
 
   React.useEffect(() => {
@@ -50,7 +50,7 @@ const Modal = () => {
   return (
     <ModalFormulario open={openModal}>
 
-      <IconeFechamento onMouseDown={() => setOpenModal(estado => !estado)}>
+      <IconeFechamento onMouseDown={() => dispatch({ tipo: "fechar-modal" })}>
         <CircleX size={40} />
       </IconeFechamento>
 

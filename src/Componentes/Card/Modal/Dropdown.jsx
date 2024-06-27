@@ -160,7 +160,7 @@ export const CampoCategoria = ({ campo, fechar, categoriaAtual, funcao }) => {
 
         {drop &&
           <ConteudoDrop $ativo={existe} >
-            {categorias[0].map((tema) => {
+            {categorias.map((tema) => {
               return <OptionDrop key={tema} onClick={(e) => operacaoClick(e)}>{tema}</OptionDrop>
             })}
           </ConteudoDrop>
