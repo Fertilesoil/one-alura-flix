@@ -67,4 +67,15 @@ const apagarCard = async (id, titulo, dispatch) => {
   })
 }
 
-export { chamadaApi, salvarVideo, buscarCardPorId, apagarCard }
+const cadastrarNovoVideo = (novoVideo, navegar, dispatch) => {
+  fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(novoVideo)
+  }).then(() => {
+    chamadaApi(dispatch)
+    return navegar("/")
+  })
+}
+
+export { chamadaApi, salvarVideo, buscarCardPorId, apagarCard, cadastrarNovoVideo }

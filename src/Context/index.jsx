@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import { childrenPropTypes } from "../Validacoes/PropTypes";
 import { estadoInicial, reducer } from "../Reducers/useReduceCard";
-import { apagarCard, buscarCardPorId, chamadaApi, salvarVideo } from "../Api/Api";
+import { apagarCard, buscarCardPorId, cadastrarNovoVideo, chamadaApi, salvarVideo } from "../Api/Api";
 
 export const AluraContext = React.createContext();
 
@@ -23,6 +23,7 @@ const ContextProvider = ({ children }) => {
     dispatch,
     salvarVideo: (novoVideo) => salvarVideo(novoVideo, dispatch),
     apagarCard: (id, titulo) => apagarCard(id, titulo, dispatch),
+    cadastrarNovoVideo: (novoVideo, navegar) => cadastrarNovoVideo(novoVideo, navegar, dispatch),
     buscarCardPorId,
     abrirModal
   }

@@ -6,6 +6,7 @@ import { campoCategoriaPropTypes } from "../../../Validacoes/PropTypes"
 
 const WrapperDropDown = styled.div`
   position: relative;
+  bottom: ${props => props.$tipo === "cadastro" ? "-9px" : ""};
 `
 
 const Paragrafo = styled.p`
@@ -24,18 +25,55 @@ const BotaoDrop = styled.button`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-width: ${props => props.$tipo === "cadastro" ? "20rem" : ""};
   color: #f7f7f7d5;
   background: transparent;
-  border: 2px solid var(--standard-blue);
+  border: ${props => {
+    switch (props.$tipo) {
+      case "modal":
+        return "2px solid var(--standard-blue)"
+      case "cadastro":
+        return "2px solid var(--forms-grey)"
+      default:
+        return
+    }
+  }};
   border-radius: .5rem;
   font-size: 1rem;
-  padding: .87rem;
+  padding: ${props => {
+    switch (props.$tipo) {
+      case "modal":
+        return ".87rem"
+      case "cadastro":
+        return ".80rem"
+      default:
+        return
+    }
+  }};
   cursor: pointer;
   transition: all .37s ease-in-out;
 
   &:focus-within {
-    border: 2px solid var(--light-blue);
-    box-shadow: 4px 4px 7px rgba(0,0,0,.5);
+    border:  ${props => {
+    switch (props.$tipo) {
+      case "modal":
+        return "2px solid var(--light-blue)"
+      case "cadastro":
+        return "2px solid #404040"
+      default:
+        return
+    }
+  }};
+    box-shadow: ${props => {
+    switch (props.$tipo) {
+      case "modal":
+        return "4px 4px 7px rgba(0,0,0,.5)"
+      case "cadastro":
+        return "3px 3px 8px rgba(0,0,0,.5)"
+      default:
+        return
+    }
+  }};
     transition: all .37s ease-in-out;
   }
 
@@ -48,8 +86,26 @@ const ConteudoDrop = styled.div`
   width: 100%;
   position: absolute;
   margin-top: 1rem;
-  background: #03122f;
-  border: 2px solid var(--light-blue);
+  background: ${props => {
+    switch (props.$tipo) {
+      case "modal":
+        return "#03122f"
+      case "cadastro":
+        return "#191919"
+      default:
+        return
+    }
+  }};
+  border: ${props => {
+    switch (props.$tipo) {
+      case "modal":
+        return "2px solid var(--light-blue)"
+      case "cadastro":
+        return "2px solid #404040"
+      default:
+        return
+    }
+  }};
   border-radius: .5rem;
   min-height: 3.5rem;
   box-shadow: 4px 4px 7px rgba(0,0,0,.5);
@@ -108,7 +164,7 @@ const OptionDrop = styled.button`
   }
 `
 
-export const CampoCategoria = ({ campo, fechar, categoriaAtual, funcao }) => {
+export const CampoCategoria = ({ campo, fechar, categoriaAtual, funcao, tipo = "modal" }) => {
 
   const { categorias } = contextoAlura();
   const [drop, setDrop] = React.useState(false);
@@ -147,8 +203,9 @@ export const CampoCategoria = ({ campo, fechar, categoriaAtual, funcao }) => {
   return (
     <Wrapper>
       <Paragrafo>{campo}</Paragrafo>
-      <WrapperDropDown>
+      <WrapperDropDown $tipo={tipo}>
         <BotaoDrop
+          $tipo={tipo}
           onClick={(e) => e.preventDefault()}
           onMouseDown={() => {
             return toggleDropdown()
@@ -159,7 +216,7 @@ export const CampoCategoria = ({ campo, fechar, categoriaAtual, funcao }) => {
         </BotaoDrop>
 
         {drop &&
-          <ConteudoDrop $ativo={existe} >
+          <ConteudoDrop $ativo={existe} $tipo={tipo}>
             {categorias.map((tema) => {
               return <OptionDrop key={tema} onClick={(e) => operacaoClick(e)}>{tema}</OptionDrop>
             })}
