@@ -28,9 +28,14 @@ const Frame = styled.iframe`
 `
 
 const Descricao = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 86%;
   padding: 0 8rem;
   color: white;
   font-family: var(--font-source-sans);
+  transition: all .37s;
 
   & > h1 {
     margin-bottom: .5rem;
@@ -51,9 +56,17 @@ const Descricao = styled.section`
     font-size: 1.05rem;
   }
 
+  @media screen and (width < 1020px) {
+    & {
+      padding: 0 6rem;
+      width: 100%;
+    }
+  }
+
   @media screen and (width < 600px) {
     & {
       padding: 0 2rem;
+      width: 100%;
     }
   }
 `

@@ -5,8 +5,6 @@ const Imagem = styled.figure`
   flex: 1;
   max-height: 244px;
   z-index: -10;
-  -webkit-mask-image: linear-gradient(to bottom, black 0% ,transparent 95%);
-  mask-image: linear-gradient(to bottom, black 0% ,transparent 95%);
   transition: all .27s ease-in-out;
   
   & > img {
@@ -14,9 +12,8 @@ const Imagem = styled.figure`
     width: 100%;
     object-fit: cover;
     border-radius: 0 0 2% 2%;
-    filter: brightness(1.25);
-    -webkit-mask-image: linear-gradient(to bottom, black 0% ,transparent 110%);
-    mask-image: linear-gradient(to bottom, black 0% ,transparent 110%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0% ,transparent 97%);
+    mask-image: linear-gradient(to bottom, black 0% ,transparent 97%);
     transition: all .27s ease-in-out;
   }
 `
