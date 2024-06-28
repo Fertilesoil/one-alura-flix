@@ -3,17 +3,20 @@
 const Imagem = styled.figure`
   display: flex;
   flex: 1;
-  position: relative;
   max-height: 244px;
+  z-index: -10;
+  -webkit-mask-image: linear-gradient(to bottom, black 0% ,transparent 95%);
+  mask-image: linear-gradient(to bottom, black 0% ,transparent 95%);
   transition: all .27s ease-in-out;
-
+  
   & > img {
     display: block;
     width: 100%;
     object-fit: cover;
     border-radius: 0 0 2% 2%;
-    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+    filter: brightness(1.25);
+    -webkit-mask-image: linear-gradient(to bottom, black 0% ,transparent 110%);
+    mask-image: linear-gradient(to bottom, black 0% ,transparent 110%);
     transition: all .27s ease-in-out;
   }
 `
@@ -62,7 +65,6 @@ const Article = styled.article`
         return
     }
   }};
-  background: var(--dark);
   margin-bottom: 1rem;
   flex-shrink: 0;
   transition: all .27s ease-in-out;

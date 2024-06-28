@@ -150,7 +150,16 @@ const OptionDrop = styled.button`
   }
 
   &:hover {
-    background: #6bd0ff6a;
+    background: ${props => {
+    switch (props.$tipo) {
+      case "modal":
+        return "#6bd0ff6a"
+      case "cadastro":
+        return "#404040"
+      default:
+        return
+    }
+  }};
   }
 
   &:nth-of-type(1) {
@@ -218,7 +227,7 @@ export const CampoCategoria = ({ campo, fechar, categoriaAtual, funcao, tipo = "
         {drop &&
           <ConteudoDrop $ativo={existe} $tipo={tipo}>
             {categorias.map((tema) => {
-              return <OptionDrop key={tema} onClick={(e) => operacaoClick(e)}>{tema}</OptionDrop>
+              return <OptionDrop key={tema} $tipo={tipo} onClick={(e) => operacaoClick(e)}>{tema}</OptionDrop>
             })}
           </ConteudoDrop>
         }

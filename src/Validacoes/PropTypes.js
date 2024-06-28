@@ -3,7 +3,8 @@
 export const botaoNavBarPropTypes = {
   children: PropTypes.string,
   to: PropTypes.string,
-  tipo: PropTypes.string
+  tipo: PropTypes.string,
+  props: PropTypes.object
 }
 
 export const cardPropTypes = {
