@@ -11,6 +11,7 @@ const WrapperBotoes = styled.div`
 `
 
 const NavBar = () => {
+
   return (
     <Header>
       <nav>
@@ -18,11 +19,11 @@ const NavBar = () => {
 
         <WrapperBotoes>
           <BotaoNavbar to={`/`} tipo={`Link`}>
-            <span>Home</span>
+            Home
           </BotaoNavbar>
 
           <BotaoNavbar to={`cadastro`} tipo={`Link`}>
-            <span>Novo Vídeo</span>
+            Novo Vídeo
           </BotaoNavbar>
         </WrapperBotoes>
       </nav>

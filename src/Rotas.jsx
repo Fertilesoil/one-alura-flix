@@ -1,25 +1,19 @@
-﻿import { BrowserRouter, Routes ,Route } from 'react-router-dom'
+﻿import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Home from './Paginas/Home'
 import Cadastro from './Paginas/Cadastro'
 import PaginaPadrao from './Paginas/PaginaPadrao'
 import Video from './Paginas/Video'
 
-const Rotas = () => {
+export const rotas = createBrowserRouter(
+  createRoutesFromElements(
+      <Route>
 
-  return (
-    <BrowserRouter>
-      
-      <Routes>
         <Route path='/' element={<PaginaPadrao />}>
           <Route index element={<Home />} />
           <Route path='cadastro' element={<Cadastro />} />
           <Route path='video/:id' element={<Video />} />
         </Route>
 
-      </Routes>
-      
-    </BrowserRouter>
+      </Route>
   )
-}
-
-export default Rotas
+)
