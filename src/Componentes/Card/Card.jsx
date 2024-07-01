@@ -83,6 +83,12 @@ const Article = styled.article`
     filter: grayscale(100%);
     transition: all .27s ease-in-out;
   }
+
+  @media screen and (width < 600px) {
+    & {
+      transform: scale(0.85);
+    }
+  }
 `
 
 const Assistir = styled.div`
