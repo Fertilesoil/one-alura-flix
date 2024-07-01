@@ -9,6 +9,12 @@ import { CampoCategoria } from "../Card/Modal/Dropdown";
 import { useNavigate } from "react-router-dom";
 import { contextoAlura } from "../../Context/UseContextHook";
 
+const componentesFormularioCadastro = {
+  CampoFormularioCadastro,
+  CampoCategoria,
+  CampoDescricaoCadastro
+};
+
 const CadastroForms = () => {
 
   const { cadastrarNovoVideo } = contextoAlura();
@@ -46,12 +52,6 @@ const CadastroForms = () => {
 
     const Component = componentesFormularioCadastro[tipo];
     return <Component key={index} {...props} {...extraProps} />;
-  };
-
-  const componentesFormularioCadastro = {
-    CampoFormularioCadastro,
-    CampoCategoria,
-    CampoDescricaoCadastro
   };
 
   return (

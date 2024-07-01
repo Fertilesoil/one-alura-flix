@@ -4,14 +4,14 @@ import { Article, Imagem, Footer, Assistir } from "./Card";
 import { cardPropTypes } from "../../Validacoes/PropTypes";
 import { Link } from "react-router-dom";
 
-const Card = ({ titulo, imagem, id }) => {
+const Card = ({ titulo, imagem, id, alt }) => {
 
   const { apagarCard, abrirModal } = contextoAlura();
 
   return (
     <Article $titulo={titulo}>
       <Imagem>
-        <img src={imagem} alt={titulo} />
+        <img src={imagem} alt={alt} />
       </Imagem>
 
       <Footer $titulo={titulo}>

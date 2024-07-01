@@ -5,6 +5,8 @@ const Imagem = styled.figure`
   flex: 1;
   max-height: 244px;
   z-index: -10;
+  color: #F7F7F7;
+  font-size: 1.1rem;
   transition: all .27s ease-in-out;
   
   & > img {

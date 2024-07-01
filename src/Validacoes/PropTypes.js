@@ -13,7 +13,7 @@ export const cardPropTypes = {
 }
 
 export const childrenPropTypes = {
-  children: PropTypes.element
+  children: PropTypes.node
 }
 
 export const inputPropTypes = {

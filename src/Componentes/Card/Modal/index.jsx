@@ -17,19 +17,22 @@ const Modal = () => {
   const { openModal, dispatch, videoAtual, salvarVideo } = contextoAlura();
 
   const videoInicial = {
-    id: String(videoAtual?.id),
-    titulo: videoAtual?.titulo,
-    categoria: videoAtual?.categoria,
-    imagem: videoAtual?.imagem,
-    video: videoAtual?.video,
-    descricao: videoAtual?.descricao
+    id: String(videoAtual?.id || "0"),
+    titulo: videoAtual?.titulo || "",
+    categoria: videoAtual?.categoria || "",
+    imagem: videoAtual?.imagem || "",
+    video: videoAtual?.video || "",
+    descricao: videoAtual?.descricao || ""
   }
 
   const [novoVideo, setNovoVideo] = React.useState(videoInicial);
 
-  React.useEffect(() => {
-    setNovoVideo(videoInicial);
-  }, [videoAtual, openModal]);
+  const limparCampos = () => {
+    return Object.keys(videoInicial).reduce((acc, chave) => {
+      acc[chave] = "";
+      return acc
+    }, {})
+  }
 
   const guardarObjeto = (e) => {
     const { name, value } = e.target;
@@ -54,6 +57,10 @@ const Modal = () => {
     const Elemento = componentesFormularioModal[tipo];
     return <Elemento key={index} {...props} />
   }
+
+  React.useEffect(() => {
+    setNovoVideo(videoInicial);
+  }, [videoAtual, openModal]);
 
   return (
     <ModalFormulario open={openModal}>
@@ -80,7 +87,12 @@ const Modal = () => {
               Salvar
             </BotaoNavbar>
 
-            <BotaoNavbar>
+            <BotaoNavbar
+              onClick={(e) => {
+                e.preventDefault();
+                setNovoVideo(limparCampos)
+              }}
+            >
               Limpar
             </BotaoNavbar>
           </BotoesForms>

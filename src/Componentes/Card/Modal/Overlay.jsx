@@ -12,7 +12,7 @@ const CamadaModal = styled.div`
   min-width: 100%;
   min-height: 100vh;
   background:#03122FC2;
-  z-index: 10;
+  z-index: 20;
 `
 
 export const OverLay = () => {
