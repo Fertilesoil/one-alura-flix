@@ -6,6 +6,12 @@ import { CampoCategoria } from './Dropdown';
 import { CampoDescricaoModal, CampoFormularioModal, ModalFormulario, IconeFechamento, ConteudoModal, FormsModal, BotoesForms } from '../../Formulario';
 import React from 'react';
 
+const componentesFormularioModal = {
+  CampoFormularioModal,
+  CampoCategoria,
+  CampoDescricaoModal
+}
+
 const Modal = () => {
 
   const { openModal, dispatch, videoAtual, salvarVideo } = contextoAlura();
@@ -22,15 +28,8 @@ const Modal = () => {
   const [novoVideo, setNovoVideo] = React.useState(videoInicial);
 
   React.useEffect(() => {
-    setNovoVideo({
-      id: String(videoAtual?.id) || "0",
-      titulo: videoAtual?.titulo || '',
-      categoria: videoAtual?.categoria || '',
-      imagem: videoAtual?.imagem || '',
-      video: videoAtual?.video || '',
-      descricao: videoAtual?.descricao || ''
-    });
-  }, [videoAtual]);
+    setNovoVideo(videoInicial);
+  }, [videoAtual, openModal]);
 
   const guardarObjeto = (e) => {
     const { name, value } = e.target;
@@ -41,11 +40,20 @@ const Modal = () => {
     }));
   }
 
-  React.useEffect(() => {
-    if (!openModal) {
-      setNovoVideo(videoInicial);
-    }
-  }, [openModal]);
+  const camposFormularioModal = [
+    { tipo: "CampoFormularioModal", campo: "Título", name: "titulo", valor: novoVideo.titulo, funcao: guardarObjeto },
+    { tipo: "CampoFormularioModal", campo: "Imagem", name: "imagem", valor: novoVideo.imagem, funcao: guardarObjeto },
+    { tipo: "CampoFormularioModal", campo: "Vídeo", name: "video", valor: novoVideo.video, funcao: guardarObjeto },
+    { tipo: "CampoDescricaoModal", campo: "Descrição", name: "descricao", valor: novoVideo.descricao, funcao: guardarObjeto },
+    { tipo: "CampoCategoria", campo: "Categoria", fechar: openModal, valor: novoVideo.categoria, funcao: setNovoVideo }
+  ]
+
+  const renderizarCampoFormularioModal = (campo, index) => {
+    const { tipo, ...props } = campo;
+
+    const Elemento = componentesFormularioModal[tipo];
+    return <Elemento key={index} {...props} />
+  }
 
   return (
     <ModalFormulario open={openModal}>
@@ -58,36 +66,9 @@ const Modal = () => {
         <h2>Editar Card: </h2>
 
         <FormsModal>
-          <CampoFormularioModal
-            campo={`Título`}
-            name={`titulo`}
-            valor={novoVideo.titulo}
-            funcao={guardarObjeto}
-          />
-
-          <CampoCategoria campo={`Categoria`} fechar={openModal} categoriaAtual={novoVideo.categoria} funcao={setNovoVideo} />
-
-          <CampoFormularioModal
-            campo={`Imagem`}
-            name={`imagem`}
-            valor={novoVideo.imagem}
-            funcao={guardarObjeto}
-          />
-
-
-          <CampoFormularioModal
-            campo={`Vídeo`}
-            name={`video`}
-            valor={novoVideo.video}
-            funcao={guardarObjeto}
-          />
-
-          <CampoDescricaoModal
-            campo={`Descrição`}
-            name={`descricao`}
-            valor={novoVideo.descricao}
-            funcao={guardarObjeto}
-          />
+          {renderizarCampoFormularioModal(camposFormularioModal[0], 0)}
+          {renderizarCampoFormularioModal(camposFormularioModal[4], 4)}
+          {camposFormularioModal.slice(1, 4).map(renderizarCampoFormularioModal)}
 
           <BotoesForms>
             <BotaoNavbar

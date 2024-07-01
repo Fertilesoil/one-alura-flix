@@ -6,6 +6,7 @@ import { contextoAlura } from "../Context/UseContextHook"
 
 const Home = () => {
   const { videos } = contextoAlura();
+
   return (
     <>
       <Banner />

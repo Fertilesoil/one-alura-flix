@@ -33,6 +33,27 @@ const CadastroForms = () => {
     }));
   }
 
+  const camposFormularioCadastro = [
+    { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: novoVideo.titulo, funcao: guardarObjeto },
+    { tipo: 'CampoCategoria', campo: 'Categoria', name: 'categoria', valor: novoVideo.categoria, funcao: setNovoVideo, extraProps: { tipo: 'cadastro' } },
+    { tipo: 'CampoFormularioCadastro', campo: 'Imagem', name: 'imagem', valor: novoVideo.imagem, funcao: guardarObjeto },
+    { tipo: 'CampoFormularioCadastro', campo: 'Vídeo', name: 'video', valor: novoVideo.video, funcao: guardarObjeto },
+    { tipo: 'CampoDescricaoCadastro', campo: 'Descrição', name: 'descricao', valor: novoVideo.descricao, funcao: guardarObjeto }
+  ];
+
+  const renderizarCampoCadastro = (campo, index) => {
+    const { tipo, extraProps, ...props } = campo;
+
+    const Component = componentesFormularioCadastro[tipo];
+    return <Component key={index} {...props} {...extraProps} />;
+  };
+
+  const componentesFormularioCadastro = {
+    CampoFormularioCadastro,
+    CampoCategoria,
+    CampoDescricaoCadastro
+  };
+
   return (
     <section>
       <TituloForms>
@@ -48,44 +69,14 @@ const CadastroForms = () => {
           </WrapperCadastro>
 
           <DivisoriaCadastro>
-            <CampoFormularioCadastro
-              campo={`Título`}
-              name={`titulo`}
-              valor={novoVideo.titulo}
-              funcao={guardarObjeto}
-            />
-
-            <CampoCategoria
-              campo={`Categoria`}
-              name={`categoria`}
-              valor={novoVideo.categoria}
-              funcao={setNovoVideo}
-              tipo="cadastro"
-            />
+            {camposFormularioCadastro.slice(0, 2).map(renderizarCampoCadastro)}
           </DivisoriaCadastro>
 
           <DivisoriaCadastro>
-            <CampoFormularioCadastro
-              campo={`Imagem`}
-              name={`imagem`}
-              valor={novoVideo.imagem}
-              funcao={guardarObjeto}
-            />
-
-            <CampoFormularioCadastro
-              campo={`Vídeo`}
-              name={`video`}
-              valor={novoVideo.video}
-              funcao={guardarObjeto}
-            />
+            {camposFormularioCadastro.slice(2, 4).map(renderizarCampoCadastro)}
           </DivisoriaCadastro>
 
-          <CampoDescricaoCadastro
-            campo={`Descrição`}
-            name={`descricao`}
-            valor={novoVideo.descricao}
-            funcao={guardarObjeto}
-          />
+          {renderizarCampoCadastro(camposFormularioCadastro[4], 4)}
 
           <BotoesCadastro>
             <BotaoNavbar tipo={`Forms`} onClick={e => {
@@ -97,6 +88,7 @@ const CadastroForms = () => {
 
             <BotaoNavbar tipo={`Forms`} onClick={(e) => {
               e.preventDefault()
+              camposFormularioCadastro[4].valor = ""
               return setNovoVideo(videoInicial)
             }}>
               Limpar
