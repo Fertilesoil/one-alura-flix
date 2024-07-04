@@ -1,56 +1,32 @@
-﻿import React from "react";
-import BotaoNavbar from "../NavBar/BotaoNavbar"
-import {
-  BotoesCadastro, CampoDescricaoCadastro, CampoFormularioCadastro,
-  FormsCadastro, WrapperCadastro, DivisoriaCadastro, SectionCadastro
-} from "../Formulario";
+﻿import BotaoNavbar from "../NavBar/BotaoNavbar"
+import { BotoesCadastro, FormsCadastro, WrapperCadastro, DivisoriaCadastro, SectionCadastro } from "../Formulario";
 import { TituloForms, Titulo, SubTitulo } from "./TItuloForms";
-import { CampoCategoria } from "../Card/Modal/Dropdown";
 import { useNavigate } from "react-router-dom";
 import { contextoAlura } from "../../Context/UseContextHook";
-
-const componentesFormularioCadastro = {
-  CampoFormularioCadastro,
-  CampoCategoria,
-  CampoDescricaoCadastro
-};
+import { Componentes } from "../../Reducers/useReducerFormulario";
 
 const CadastroForms = () => {
 
-  const { cadastrarNovoVideo } = contextoAlura();
+  const { cadastrarNovoVideo, estadoFormulario, dispatchFormulario } = contextoAlura();
+  
   const navegar = useNavigate();
-
-  const videoInicial = {
-    titulo: "",
-    categoria: "",
-    imagem: "",
-    video: "",
-    descricao: ""
-  }
-
-  const [novoVideo, setNovoVideo] = React.useState(videoInicial);
 
   const guardarObjeto = (e) => {
     const { name, value } = e.target;
 
-    setNovoVideo((estado) => ({
-      ...estado,
-      [name]: value
-    }));
+    dispatchFormulario({
+      tipo: "atualizar-video",
+      payload: { name, value }
+    })
+    console.log(estadoFormulario.videoInicial)
   }
 
-  const camposFormularioCadastro = [
-    { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: novoVideo.titulo, funcao: guardarObjeto },
-    { tipo: 'CampoCategoria', campo: 'Categoria', name: 'categoria', valor: novoVideo.categoria, funcao: setNovoVideo, extraProps: { tipo: 'cadastro' } },
-    { tipo: 'CampoFormularioCadastro', campo: 'Imagem', name: 'imagem', valor: novoVideo.imagem, funcao: guardarObjeto },
-    { tipo: 'CampoFormularioCadastro', campo: 'Vídeo', name: 'video', valor: novoVideo.video, funcao: guardarObjeto },
-    { tipo: 'CampoDescricaoCadastro', campo: 'Descrição', name: 'descricao', valor: novoVideo.descricao, funcao: guardarObjeto }
-  ];
+  const camposFormularioCadastro = Componentes.criarCamposFormularioCadastro(estadoFormulario, guardarObjeto, dispatchFormulario);
 
   const renderizarCampoCadastro = (campo, index) => {
     const { tipo, extraProps, ...props } = campo;
 
-    const Component = componentesFormularioCadastro[tipo];
+    const Component = Componentes.componentesFormularioCadastro[tipo];
     return <Component key={index} {...props} {...extraProps} />;
   };
 
@@ -81,7 +57,7 @@ const CadastroForms = () => {
           <BotoesCadastro>
             <BotaoNavbar tipo={`Forms`} onClick={e => {
               e.preventDefault();
-              cadastrarNovoVideo(novoVideo, navegar);
+              cadastrarNovoVideo(estadoFormulario.videoInicial, navegar);
             }}>
               Guardar
             </BotaoNavbar>
@@ -89,7 +65,7 @@ const CadastroForms = () => {
             <BotaoNavbar tipo={`Forms`} onClick={(e) => {
               e.preventDefault()
               camposFormularioCadastro[4].valor = ""
-              return setNovoVideo(videoInicial)
+              return dispatchFormulario({ tipo: "limpar-campos" })
             }}>
               Limpar
             </BotaoNavbar>

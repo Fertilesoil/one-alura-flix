@@ -28,3 +28,9 @@ export const campoCategoriaPropTypes = {
   categoriaAtual: PropTypes.string,
   funcao: PropTypes.func,
 }
+
+export const tagPropTypes = {
+  secao: PropTypes.string,
+  children: PropTypes.node,
+  tamanho: PropTypes.string
+}

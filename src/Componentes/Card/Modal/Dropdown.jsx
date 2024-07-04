@@ -11,11 +11,16 @@ export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor })
   const [existe, setExiste] = React.useState(false);
 
   const operacaoClick = (e) => {
+    const { textContent } = e.target;
     e.preventDefault();
-    funcao(estado => ({
-      ...estado,
-      categoria: e.target.textContent
-    }))
+    // funcao(estado => ({
+    //   ...estado,
+    //   categoria: e.target.textContent
+    // }))
+    funcao({
+      tipo: "atualizar-video",
+      payload: { name: "categoria", value: textContent }
+    });
     setDrop(false);
   }
 

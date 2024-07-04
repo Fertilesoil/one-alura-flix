@@ -46,11 +46,17 @@ export const TextAreaCadastro = styled.textarea`
   font-size: 1rem;
   overflow: hidden;
   resize: none;
+  overflow: auto;
   transition: all .37s ease-in-out;
 
   &:focus {
     border: 2px solid #404040;
     box-shadow: 4px 4px 7px rgba(0,0,0,.5);
     transition: all .37s ease-in-out;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
   }
 `

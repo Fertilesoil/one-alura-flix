@@ -1,4 +1,5 @@
 ﻿import styled from "styled-components"
+import { tagPropTypes } from "../../Validacoes/PropTypes";
 
 const TagPadrao = styled.div`
   text-transform: uppercase;
@@ -58,5 +59,7 @@ const Tag = ({ secao, children, tamanho }) => {
     </TagPadrao>
   )
 }
+
+Tag.propTypes = tagPropTypes;
 
 export default Tag
