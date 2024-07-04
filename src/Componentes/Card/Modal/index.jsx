@@ -2,64 +2,37 @@
 import BotaoNavbar from '../../NavBar/BotaoNavbar';
 import { contextoAlura } from "../../../Context/UseContextHook";
 import { CircleX } from 'lucide-react';
-import { CampoCategoria } from './Dropdown';
-import { CampoDescricaoModal, CampoFormularioModal, ModalFormulario, IconeFechamento, ConteudoModal, FormsModal, BotoesForms } from '../../Formulario';
+import { ModalFormulario, IconeFechamento, ConteudoModal, FormsModal, BotoesForms } from '../../Formulario';
 import React from 'react';
-
-const componentesFormularioModal = {
-  CampoFormularioModal,
-  CampoCategoria,
-  CampoDescricaoModal
-}
+import { Componentes } from '../../../Reducers/useReducerFormulario';
 
 const Modal = () => {
 
-  const { openModal, dispatch, videoAtual, salvarVideo } = contextoAlura();
-
-  const videoInicial = {
-    id: String(videoAtual?.id || "0"),
-    titulo: videoAtual?.titulo || "",
-    categoria: videoAtual?.categoria || "",
-    imagem: videoAtual?.imagem || "",
-    video: videoAtual?.video || "",
-    descricao: videoAtual?.descricao || ""
-  }
-
-  const [novoVideo, setNovoVideo] = React.useState(videoInicial);
-
-  const limparCampos = () => {
-    return Object.keys(videoInicial).reduce((acc, chave) => {
-      acc[chave] = "";
-      return acc
-    }, {})
-  }
+  const { openModal, dispatch, videoAtual, salvarVideo, dispatchFormulario, estadoFormulario } = contextoAlura();
 
   const guardarObjeto = (e) => {
     const { name, value } = e.target;
 
-    setNovoVideo(estado => ({
-      ...estado,
-      [name]: value
-    }));
+    dispatchFormulario({
+      tipo: "atualizar-video-modal",
+      payload: { name, value }
+    });
   }
 
-  const camposFormularioModal = [
-    { tipo: "CampoFormularioModal", campo: "Título", name: "titulo", valor: novoVideo.titulo, funcao: guardarObjeto },
-    { tipo: "CampoFormularioModal", campo: "Imagem", name: "imagem", valor: novoVideo.imagem, funcao: guardarObjeto },
-    { tipo: "CampoFormularioModal", campo: "Vídeo", name: "video", valor: novoVideo.video, funcao: guardarObjeto },
-    { tipo: "CampoDescricaoModal", campo: "Descrição", name: "descricao", valor: novoVideo.descricao, funcao: guardarObjeto },
-    { tipo: "CampoCategoria", campo: "Categoria", fechar: openModal, valor: novoVideo.categoria, funcao: setNovoVideo }
-  ]
+  const camposFormularioModal = Componentes.criarCamposFormularioModal(estadoFormulario, guardarObjeto, dispatchFormulario, openModal);
 
   const renderizarCampoFormularioModal = (campo, index) => {
     const { tipo, ...props } = campo;
 
-    const Elemento = componentesFormularioModal[tipo];
+    const Elemento = Componentes.componentesFormularioModal[tipo];
     return <Elemento key={index} {...props} />
   }
 
   React.useEffect(() => {
-    setNovoVideo(videoInicial);
+    dispatchFormulario({
+      tipo: "setar-video",
+      payload: { video: videoAtual }
+    });
   }, [videoAtual, openModal]);
 
   return (
@@ -81,7 +54,7 @@ const Modal = () => {
             <BotaoNavbar
               onClick={(e) => {
                 e.preventDefault();
-                salvarVideo(novoVideo);
+                salvarVideo(estadoFormulario.videoModal);
               }}
             >
               Salvar
@@ -90,7 +63,7 @@ const Modal = () => {
             <BotaoNavbar
               onClick={(e) => {
                 e.preventDefault();
-                setNovoVideo(limparCampos)
+                dispatchFormulario({ tipo: "limpar-campos-modal" })
               }}
             >
               Limpar

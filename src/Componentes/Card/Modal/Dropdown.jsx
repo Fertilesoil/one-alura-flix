@@ -13,14 +13,7 @@ export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor })
   const operacaoClick = (e) => {
     const { textContent } = e.target;
     e.preventDefault();
-    // funcao(estado => ({
-    //   ...estado,
-    //   categoria: e.target.textContent
-    // }))
-    funcao({
-      tipo: "atualizar-video",
-      payload: { name: "categoria", value: textContent }
-    });
+    funcao(textContent);
     setDrop(false);
   }
 
