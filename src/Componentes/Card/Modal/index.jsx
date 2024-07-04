@@ -1,25 +1,15 @@
 ﻿/* eslint-disable react-hooks/exhaustive-deps */
 import BotaoNavbar from '../../NavBar/BotaoNavbar';
-import { contextoAlura } from "../../../Context/UseContextHook";
+import { useContextoAlura } from "../../../Context/UseContextHook";
 import { CircleX } from 'lucide-react';
 import { ModalFormulario, IconeFechamento, ConteudoModal, FormsModal, BotoesForms } from '../../Formulario';
 import React from 'react';
 import { Componentes } from '../../../Reducers/useReducerFormulario';
 
 const Modal = () => {
+  const { openModal, dispatch, videoAtual, salvarVideo, dispatchFormulario, videoModal, guardarObjeto } = useContextoAlura();
 
-  const { openModal, dispatch, videoAtual, salvarVideo, dispatchFormulario, estadoFormulario } = contextoAlura();
-
-  const guardarObjeto = (e) => {
-    const { name, value } = e.target;
-
-    dispatchFormulario({
-      tipo: "atualizar-video-modal",
-      payload: { name, value }
-    });
-  }
-
-  const camposFormularioModal = Componentes.criarCamposFormularioModal(estadoFormulario, guardarObjeto, dispatchFormulario, openModal);
+  const camposFormularioModal = Componentes.criarCamposFormularioModal(videoModal, guardarObjeto, dispatchFormulario, openModal);
 
   const renderizarCampoFormularioModal = (campo, index) => {
     const { tipo, ...props } = campo;
@@ -54,7 +44,7 @@ const Modal = () => {
             <BotaoNavbar
               onClick={(e) => {
                 e.preventDefault();
-                salvarVideo(estadoFormulario.videoModal);
+                salvarVideo(videoModal);
               }}
             >
               Salvar

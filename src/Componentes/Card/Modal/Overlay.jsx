@@ -1,5 +1,5 @@
 ﻿import styled from "styled-components";
-import { contextoAlura } from "../../../Context/UseContextHook";
+import { useContextoAlura } from "../../../Context/UseContextHook";
 
 const CamadaModal = styled.div`
   display: ${props => props.$ativo ? "block" : "none"};
@@ -17,7 +17,7 @@ const CamadaModal = styled.div`
 
 export const OverLay = () => {
 
-  const { openModal } = contextoAlura();
+  const { openModal } = useContextoAlura();
 
   return (
     <CamadaModal $ativo={openModal} />

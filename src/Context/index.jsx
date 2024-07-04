@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import { childrenPropTypes } from "../Validacoes/PropTypes";
 import { estadoInicial, reducer } from "../Reducers/useReduceCard";
-import { apagarCard, buscarCardPorId, cadastrarNovoVideo, chamadaApi, salvarVideo } from "../Api/Api";
+import { apagarCard, cadastrarNovoVideo, chamadaApi, salvarVideo } from "../Api/Api";
 import { estadoInicalCadastro, formularioReducer } from "../Reducers/useReducerFormulario";
 
 export const AluraContext = React.createContext();
@@ -16,6 +16,15 @@ const ContextProvider = ({ children }) => {
     dispatch({ tipo: "abrir-modal", payload: { titulo, id } });
   }
 
+  const guardarObjeto = (e, tipo) => {
+    const { name, value } = e.target;
+
+    dispatchFormulario({
+      tipo: tipo,
+      payload: { name, value }
+    });
+  }
+
   React.useEffect(() => {
     chamadaApi(dispatch);
   }, []);
@@ -23,12 +32,12 @@ const ContextProvider = ({ children }) => {
   const shared = {
     ...estado,
     dispatch,
-    estadoFormulario,
+    ...estadoFormulario,
     dispatchFormulario,
+    guardarObjeto,
     salvarVideo: (novoVideo) => salvarVideo(novoVideo, dispatch),
     apagarCard: (id, titulo) => apagarCard(id, titulo, dispatch),
     cadastrarNovoVideo: (novoVideo, navegar) => cadastrarNovoVideo(novoVideo, navegar, dispatch),
-    buscarCardPorId,
     abrirModal
   }
 

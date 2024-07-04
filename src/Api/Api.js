@@ -40,20 +40,15 @@ const salvarVideo = async (novoVideo, dispatch) => {
   }
 };
 
-const buscarCardPorId = async (id, funcao, navegar) => {
-  await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${id}`)
-    .then(response => response.json())
-    .then(data => {
-      data = {
-        ...data,
-        video: data?.video.split("=")[1]
-      }
+const buscarVideoPorId = async ({ params }) => {
+  const { id } = params;
+  const response = await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${id}`);
+  let video = await response.json();
 
-      return funcao(data);
-    })
-    .catch(() => {
-      return navegar("/");
-    });
+  return {
+    ...video,
+    video: video.video.split("=")[1]
+  };
 }
 
 const apagarCard = async (id, titulo, dispatch) => {
@@ -76,4 +71,4 @@ const cadastrarNovoVideo = (novoVideo, navegar, dispatch) => {
   })
 }
 
-export { chamadaApi, salvarVideo, buscarCardPorId, apagarCard, cadastrarNovoVideo }
+export { chamadaApi, salvarVideo, apagarCard, cadastrarNovoVideo, buscarVideoPorId }

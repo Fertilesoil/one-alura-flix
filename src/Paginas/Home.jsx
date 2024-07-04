@@ -2,10 +2,10 @@
 import Card from "../Componentes/Card"
 import ConteudoPrincipal from "../Componentes/ConteudoPrincipal"
 import Secao from "../Componentes/Secao"
-import { contextoAlura } from "../Context/UseContextHook"
+import { useContextoAlura } from "../Context/UseContextHook"
 
 const Home = () => {
-  const { videos } = contextoAlura();
+  const { videos } = useContextoAlura();
 
   return (
     <>

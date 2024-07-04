@@ -9,12 +9,12 @@ const video = {
   descricao: ""
 }
 
-export const estadoInicalCadastro = {
+const estadoInicalCadastro = {
   videoInicial: video,
   videoModal: null
 }
 
-export const formularioReducer = (estado, acao) => {
+const formularioReducer = (estado, acao) => {
   switch (acao.tipo) {
     case "atualizar-video":
       return {
@@ -75,26 +75,30 @@ export const formularioReducer = (estado, acao) => {
   }
 }
 
-const criarCamposFormularioCadastro = (estado, guardarObjeto, dispatch) => [
-  { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: estado.videoInicial.titulo, funcao: guardarObjeto },
-  { tipo: 'CampoCategoria', campo: 'Categoria', name: 'categoria', valor: estado.videoInicial.categoria, funcao: (textContent) => dispatch({
-    tipo: "atualizar-video",
-    payload: { name: "categoria", value: textContent }
-  }), extraProps: { tipo: 'cadastro' } },
-  { tipo: 'CampoFormularioCadastro', campo: 'Imagem', name: 'imagem', valor: estado.videoInicial.imagem, funcao: guardarObjeto },
-  { tipo: 'CampoFormularioCadastro', campo: 'Vídeo', name: 'video', valor: estado.videoInicial.video, funcao: guardarObjeto },
-  { tipo: 'CampoDescricaoCadastro', campo: 'Descrição', name: 'descricao', valor: estado.videoInicial.descricao, funcao: guardarObjeto }
+const criarCamposFormularioCadastro = (videoInicial, guardarObjeto, dispatch) => [
+  { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: videoInicial.titulo, funcao: (e) => guardarObjeto(e, "atualizar-video") },
+  {
+    tipo: 'CampoCategoria', campo: 'Categoria', name: 'categoria', valor: videoInicial.categoria, funcao: (textContent) => dispatch({
+      tipo: "atualizar-video",
+      payload: { name: "categoria", value: textContent }
+    }), extraProps: { tipo: 'cadastro' }
+  },
+  { tipo: 'CampoFormularioCadastro', campo: 'Imagem', name: 'imagem', valor: videoInicial.imagem, funcao: (e) => guardarObjeto(e, "atualizar-video") },
+  { tipo: 'CampoFormularioCadastro', campo: 'Vídeo', name: 'video', valor: videoInicial.video, funcao: (e) => guardarObjeto(e, "atualizar-video") },
+  { tipo: 'CampoDescricaoCadastro', campo: 'Descrição', name: 'descricao', valor: videoInicial.descricao, funcao: (e) => guardarObjeto(e, "atualizar-video") }
 ];
 
-const criarCamposFormularioModal = (estado, guardarObjeto, dispatch, openModal) => [
-  { tipo: "CampoFormularioModal", campo: "Título", name: "titulo", valor: estado.videoModal?.titulo, funcao: guardarObjeto },
-  { tipo: "CampoFormularioModal", campo: "Imagem", name: "imagem", valor: estado.videoModal?.imagem, funcao: guardarObjeto },
-  { tipo: "CampoFormularioModal", campo: "Vídeo", name: "video", valor: estado.videoModal?.video, funcao: guardarObjeto },
-  { tipo: "CampoDescricaoModal", campo: "Descrição", name: "descricao", valor: estado.videoModal?.descricao, funcao: guardarObjeto },
-  { tipo: "CampoCategoria", campo: "Categoria", fechar: openModal, valor: estado.videoModal?.categoria, funcao: (textContent) => dispatch({
-    tipo: "atualizar-video-modal",
-    payload: { name: "categoria", value: textContent }
-  }) }
+const criarCamposFormularioModal = (videoModal, guardarObjeto, dispatch, openModal) => [
+  { tipo: "CampoFormularioModal", campo: "Título", name: "titulo", valor: videoModal?.titulo, funcao: (e) => guardarObjeto(e, "atualizar-video-modal") },
+  { tipo: "CampoFormularioModal", campo: "Imagem", name: "imagem", valor: videoModal?.imagem, funcao: (e) => guardarObjeto(e, "atualizar-video-modal") },
+  { tipo: "CampoFormularioModal", campo: "Vídeo", name: "video", valor: videoModal?.video, funcao: (e) => guardarObjeto(e, "atualizar-video-modal") },
+  { tipo: "CampoDescricaoModal", campo: "Descrição", name: "descricao", valor: videoModal?.descricao, funcao: (e) => guardarObjeto(e, "atualizar-video-modal") },
+  {
+    tipo: "CampoCategoria", campo: "Categoria", fechar: openModal, valor: videoModal?.categoria, funcao: (textContent) => dispatch({
+      tipo: "atualizar-video-modal",
+      payload: { name: "categoria", value: textContent }
+    })
+  }
 ]
 
 const componentesFormularioCadastro = {
@@ -115,3 +119,5 @@ export const Componentes = {
   criarCamposFormularioModal,
   componentesFormularioModal
 }
+
+export { estadoInicalCadastro, formularioReducer }

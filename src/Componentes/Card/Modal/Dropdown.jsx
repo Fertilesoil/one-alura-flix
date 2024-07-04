@@ -1,12 +1,12 @@
 ﻿import React from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import { contextoAlura } from "../../../Context/UseContextHook"
+import { useContextoAlura } from "../../../Context/UseContextHook"
 import { campoCategoriaPropTypes } from "../../../Validacoes/PropTypes"
 import { BotaoDrop, ConteudoDrop, OptionDrop, Paragrafo, Wrapper, WrapperDropDown } from "./ComponentesDropdown"
 
 export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor }) => {
 
-  const { categorias } = contextoAlura();
+  const { categorias } = useContextoAlura();
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
 

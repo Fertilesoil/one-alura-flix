@@ -1,22 +1,11 @@
 ﻿/* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
 import ReactMarkdown from "react-markdown";
-import { contextoAlura } from "../../Context/UseContextHook";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { Descricao, Wrapper, Frame } from "./IFrame";
 
 const IFrame = () => {
-
-  const { buscarCardPorId } = contextoAlura();
-
-  const [card, setCard] = React.useState(null);
-  const { id } = useParams();
-  const navegar = useNavigate();
-
-  React.useEffect(() => {
-      buscarCardPorId(id, setCard, navegar);
-  }, [id]);
-
+  const card = useLoaderData();
+  console.log(card);
   return (
     <Wrapper>
       <Frame

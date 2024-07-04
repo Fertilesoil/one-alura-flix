@@ -2,26 +2,15 @@
 import { BotoesCadastro, FormsCadastro, WrapperCadastro, DivisoriaCadastro, SectionCadastro } from "../Formulario";
 import { TituloForms, Titulo, SubTitulo } from "./TItuloForms";
 import { useNavigate } from "react-router-dom";
-import { contextoAlura } from "../../Context/UseContextHook";
+import { useContextoAlura } from "../../Context/UseContextHook";
 import { Componentes } from "../../Reducers/useReducerFormulario";
 
 const CadastroForms = () => {
-
-  const { cadastrarNovoVideo, estadoFormulario, dispatchFormulario } = contextoAlura();
+  const { cadastrarNovoVideo, videoInicial, dispatchFormulario, guardarObjeto } = useContextoAlura();
   
   const navegar = useNavigate();
 
-  const guardarObjeto = (e) => {
-    const { name, value } = e.target;
-
-    dispatchFormulario({
-      tipo: "atualizar-video",
-      payload: { name, value }
-    })
-    console.log(estadoFormulario.videoInicial)
-  }
-
-  const camposFormularioCadastro = Componentes.criarCamposFormularioCadastro(estadoFormulario, guardarObjeto, dispatchFormulario);
+  const camposFormularioCadastro = Componentes.criarCamposFormularioCadastro(videoInicial, guardarObjeto, dispatchFormulario);
 
   const renderizarCampoCadastro = (campo, index) => {
     const { tipo, extraProps, ...props } = campo;
@@ -57,7 +46,7 @@ const CadastroForms = () => {
           <BotoesCadastro>
             <BotaoNavbar tipo={`Forms`} onClick={e => {
               e.preventDefault();
-              cadastrarNovoVideo(estadoFormulario.videoInicial, navegar);
+              cadastrarNovoVideo(videoInicial, navegar);
             }}>
               Guardar
             </BotaoNavbar>

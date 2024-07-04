@@ -1,4 +1,4 @@
-﻿import { contextoAlura } from "../../Context/UseContextHook";
+﻿import { useContextoAlura } from "../../Context/UseContextHook";
 import { PencilLine, Trash, TvMinimalPlay } from "lucide-react"
 import { Article, Imagem, Footer, Assistir } from "./Card";
 import { cardPropTypes } from "../../Validacoes/PropTypes";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ titulo, imagem, id, alt }) => {
 
-  const { apagarCard, abrirModal } = contextoAlura();
+  const { apagarCard, abrirModal } = useContextoAlura();
 
   return (
     <Article $titulo={titulo}>
