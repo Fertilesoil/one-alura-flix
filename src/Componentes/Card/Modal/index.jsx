@@ -5,6 +5,7 @@ import { CircleX } from 'lucide-react';
 import { ModalFormulario, IconeFechamento, ConteudoModal, FormsModal, BotoesForms } from '../../Formulario';
 import React from 'react';
 import { Componentes } from '../../../Reducers/useReducerFormulario';
+import { validarCampos } from '../../../Utils/Utilidades';
 
 const Modal = () => {
   const { openModal, dispatch, videoAtual, salvarVideo, dispatchFormulario, videoModal, guardarObjeto } = useContextoAlura();
@@ -17,6 +18,18 @@ const Modal = () => {
     const Elemento = Componentes.componentesFormularioModal[tipo];
     return <Elemento key={index} {...props} />
   }
+
+  const atualizarVideo = (e) => {
+    e.preventDefault();
+
+    if (validarCampos(videoModal)) {
+      salvarVideo(videoModal);
+    }
+  }
+
+  React.useEffect(() => {
+    validarCampos(videoModal);
+  }, [videoModal]);
 
   React.useEffect(() => {
     dispatchFormulario({
@@ -42,10 +55,7 @@ const Modal = () => {
 
           <BotoesForms>
             <BotaoNavbar
-              onClick={(e) => {
-                e.preventDefault();
-                salvarVideo(videoModal);
-              }}
+              onClick={atualizarVideo}
             >
               Salvar
             </BotaoNavbar>

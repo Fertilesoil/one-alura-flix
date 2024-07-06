@@ -3,7 +3,7 @@ import { CampoDescricaoCadastro, CampoDescricaoModal, CampoFormularioCadastro, C
 
 const video = {
   titulo: "",
-  categoria: "",
+  categoria: "frontend",
   imagem: "",
   video: "",
   descricao: ""
@@ -76,7 +76,7 @@ const formularioReducer = (estado, acao) => {
 }
 
 const criarCamposFormularioCadastro = (videoInicial, guardarObjeto, dispatch) => [
-  { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: videoInicial.titulo, funcao: (e) => guardarObjeto(e, "atualizar-video") },
+  { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: videoInicial.titulo, funcao:  (e) => guardarObjeto(e, "atualizar-video") },
   {
     tipo: 'CampoCategoria', campo: 'Categoria', name: 'categoria', valor: videoInicial.categoria, funcao: (textContent) => dispatch({
       tipo: "atualizar-video",

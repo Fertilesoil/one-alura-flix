@@ -4,10 +4,13 @@ import { TituloForms, Titulo, SubTitulo } from "./TItuloForms";
 import { useNavigate } from "react-router-dom";
 import { useContextoAlura } from "../../Context/UseContextHook";
 import { Componentes } from "../../Reducers/useReducerFormulario";
+import React from "react";
+import { validarCampos } from "../../Utils/Utilidades";
 
 const CadastroForms = () => {
+  const [validacaoIniciada, setValidacaoIniciada] = React.useState(false);
   const { cadastrarNovoVideo, videoInicial, dispatchFormulario, guardarObjeto } = useContextoAlura();
-  
+
   const navegar = useNavigate();
 
   const camposFormularioCadastro = Componentes.criarCamposFormularioCadastro(videoInicial, guardarObjeto, dispatchFormulario);
@@ -18,6 +21,28 @@ const CadastroForms = () => {
     const Component = Componentes.componentesFormularioCadastro[tipo];
     return <Component key={index} {...props} {...extraProps} />;
   };
+
+  const salvarVideo = (e) => {
+    e.preventDefault();
+
+    if (validarCampos(videoInicial)) {
+      cadastrarNovoVideo(videoInicial, navegar);
+    } else {
+      setValidacaoIniciada(true);
+    }
+  };
+
+  React.useEffect(() => {
+    if (validacaoIniciada) {
+      validarCampos(videoInicial)
+    }
+  }, [validacaoIniciada, videoInicial]);
+
+  React.useEffect(() => {
+    return () => {
+      dispatchFormulario({ tipo: "limpar-campos" });
+    }
+  }, [])
 
   return (
     <section>
@@ -44,10 +69,7 @@ const CadastroForms = () => {
           {renderizarCampoCadastro(camposFormularioCadastro[4], 4)}
 
           <BotoesCadastro>
-            <BotaoNavbar tipo={`Forms`} onClick={e => {
-              e.preventDefault();
-              cadastrarNovoVideo(videoInicial, navegar);
-            }}>
+            <BotaoNavbar tipo={`Forms`} onClick={salvarVideo}>
               Guardar
             </BotaoNavbar>
 
