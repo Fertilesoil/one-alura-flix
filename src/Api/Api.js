@@ -49,7 +49,7 @@ const buscarVideoPorId = async ({ params }) => {
 
   return {
     ...video,
-    video: video.video.split("=")[1]
+    video: video.video?.split("=")[1]
   };
 }
 
