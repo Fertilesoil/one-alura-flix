@@ -1,8 +1,10 @@
 ﻿import toast from "react-hot-toast";
 import { agruparCards } from "../Utils/Utilidades";
 
+const url = import.meta.env.VITE_URL;
+
 const chamadaApi = async (dispatch) => {
-  const data = await fetch("https://667633a7a8d2b4d072f2b182.mockapi.io/video")
+  const data = await fetch(`${url}/video`)
     .then(data => data.json());
 
   const grupos = agruparCards(data);
@@ -18,7 +20,7 @@ const chamadaApi = async (dispatch) => {
 
 const salvarVideo = async (novoVideo, dispatch) => {
   try {
-    await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${novoVideo.id}`, {
+    await fetch(`${url}/video/${novoVideo.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(novoVideo)
@@ -42,7 +44,7 @@ const salvarVideo = async (novoVideo, dispatch) => {
 
 const buscarVideoPorId = async ({ params }) => {
   const { id } = params;
-  const response = await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${id}`);
+  const response = await fetch(`${url}/video/${id}`);
   let video = await response.json();
 
   return {
@@ -54,13 +56,13 @@ const buscarVideoPorId = async ({ params }) => {
 const apagarCard = async (id, titulo, dispatch) => {
   dispatch({ tipo: "apagar-card", payload: { titulo, id } });
 
-  await fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video/${id}`, {
+  await fetch(`${url}/video/${id}`, {
     method: "DELETE"
   }).then((() => toast.success("Vídeo deletado com sucesso!")));
 }
 
 const cadastrarNovoVideo = (novoVideo, navegar, dispatch) => {
-  fetch(`https://667633a7a8d2b4d072f2b182.mockapi.io/video`, {
+  fetch(`${url}/video`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(novoVideo)
