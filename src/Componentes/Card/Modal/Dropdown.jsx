@@ -10,7 +10,7 @@ export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor })
   const { categorias } = useContextoAlura();
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
-  let dropdownRef = React.useRef(null);
+  const dropdownRef = React.useRef(null);
 
   const operacaoClick = (e) => {
     const { textContent } = e.target;
@@ -33,9 +33,8 @@ export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor })
 
   React.useEffect(() => {
     const handleClickOutside = (event) => {
-      const alvoAtual = event.srcElement.attributes.class?.value.split(" ")[0];
-      dropdownRef = alvoAtual;
-      if (dropdownRef && dropdownRef !== "sc-fqkwJk") {
+      const condicaoDeFechamento = event.target.classList[0] === dropdownRef.current.classList[0];
+      if (!condicaoDeFechamento) {
         setDrop(false);
       }
     };
@@ -58,6 +57,7 @@ export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor })
       <Paragrafo>{campo}</Paragrafo>
       <WrapperDropDown $tipo={tipo}>
         <BotaoDrop
+          ref={dropdownRef}
           $tipo={tipo}
           onClick={(e) => e.preventDefault()}
           onMouseDown={() => {
