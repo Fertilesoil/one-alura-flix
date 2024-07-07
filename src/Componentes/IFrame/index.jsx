@@ -5,7 +5,7 @@ import { Descricao, Wrapper, Frame } from "./IFrame";
 
 const IFrame = () => {
   const card = useLoaderData();
-  console.log(card);
+
   return (
     <Wrapper>
       <Frame

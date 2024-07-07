@@ -1,4 +1,5 @@
-﻿import React from "react"
+﻿/* eslint-disable react-hooks/exhaustive-deps */
+import React from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { useContextoAlura } from "../../../Context/UseContextHook"
 import { campoCategoriaPropTypes } from "../../../Validacoes/PropTypes"
@@ -9,6 +10,7 @@ export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor })
   const { categorias } = useContextoAlura();
   const [drop, setDrop] = React.useState(false);
   const [existe, setExiste] = React.useState(false);
+  let dropdownRef = React.useRef(null);
 
   const operacaoClick = (e) => {
     const { textContent } = e.target;
@@ -28,6 +30,22 @@ export const CampoCategoria = ({ campo, fechar, funcao, tipo = "modal", valor })
       setDrop(true);
     }
   };
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      const alvoAtual = event.srcElement.attributes.class?.value.split(" ")[0];
+      dropdownRef = alvoAtual;
+      if (dropdownRef && dropdownRef !== "sc-fqkwJk") {
+        setDrop(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   React.useEffect(() => {
     if (!fechar) {

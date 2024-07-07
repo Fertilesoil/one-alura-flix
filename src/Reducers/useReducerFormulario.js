@@ -38,17 +38,19 @@ const formularioReducer = (estado, acao) => {
       return {
         ...estado,
         videoInicial: {
-          ...video
+          ...video,
+          categoria: estado.videoInicial.categoria
         }
       }
 
     case "limpar-campos-modal":
       {
         const objetoLimpo = Object.keys(estado.videoModal).reduce((acc, chave) => {
-          acc[chave] = "";
+          const valor = estado.videoModal[chave];
+          acc[chave] = chave === "categoria" ? valor : "";
           return acc
         }, {})
-        console.log(objetoLimpo)
+
         return {
           ...estado,
           videoModal: {
@@ -76,7 +78,7 @@ const formularioReducer = (estado, acao) => {
 }
 
 const criarCamposFormularioCadastro = (videoInicial, guardarObjeto, dispatch) => [
-  { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: videoInicial.titulo, funcao:  (e) => guardarObjeto(e, "atualizar-video") },
+  { tipo: 'CampoFormularioCadastro', campo: 'Título', name: 'titulo', valor: videoInicial.titulo, funcao: (e) => guardarObjeto(e, "atualizar-video") },
   {
     tipo: 'CampoCategoria', campo: 'Categoria', name: 'categoria', valor: videoInicial.categoria, funcao: (textContent) => dispatch({
       tipo: "atualizar-video",
